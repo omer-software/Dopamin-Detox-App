@@ -1,0 +1,36 @@
+name: Build APK
+
+on:
+  push:
+  workflow_dispatch:   # Actions sekmesinden elle de tetiklenebilir
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repoyu al
+        uses: actions/checkout@v4
+
+      - name: Projeyi zip'ten Ã§Ä±kar
+        run: unzip -o bosluk-android.zip
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: APK derle
+        working-directory: bosluk
+        run: gradle assembleDebug --no-daemon
+
+      - name: APK'yÄ± yÃ¼kle
+        uses: actions/upload-artifact@v4
+        with:
+          name: bosluk-debug-apk
+          path: bosluk/app/build/outputs/apk/debug/app-debug.apk
