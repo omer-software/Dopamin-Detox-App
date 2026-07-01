@@ -2,7 +2,7 @@ name: Build APK
 
 on:
   push:
-  workflow_dispatch:   # Actions sekmesinden elle de tetiklenebilir
+  workflow_dispatch:
 
 jobs:
   build:
@@ -27,6 +27,8 @@ jobs:
 
       - name: APK derle
         working-directory: bosluk
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: gradle assembleDebug --no-daemon
 
       - name: APK'yÄ± yÃ¼kle
