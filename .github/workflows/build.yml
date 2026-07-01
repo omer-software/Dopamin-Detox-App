@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Projeyi zip'ten Ã§Ä±kar
-        run: unzip -o bosluk-android.zip
+        run: unzip -o bosluk-android-3.zip
 
       - name: Java 17 kur
         uses: actions/setup-java@v4
